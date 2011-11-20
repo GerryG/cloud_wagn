@@ -1,0 +1,8 @@
+e${appconfig.appconfigid}:
+  adapter: mysql
+  username: ${appconfig.roles.db.dbuser}
+  password: ${appconfig.roles.db.dbusercredential squote}
+  host: ${appconfig.roles.db.privateipaddress}
+  secret: YrDO${appconfig.appconfigid}${appconfig.roles.db.dbname}${appconfig.roles.db.dbuser}
+  database: ${appconfig.roles.db.dbname}
+  session_key: wagn_${appconfig.appconfigid}

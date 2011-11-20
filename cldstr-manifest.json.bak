@@ -1,0 +1,118 @@
+{
+    "type" : "app",
+
+    "info" : {
+        "name"    : "Wagn",
+        "tagline" : "cohere and now",
+        "upstreamversion" : "1.7.1",
+        "cldstrversion"   : "0.%{now.identifier}"
+    },
+
+    "package" : {
+        "maintainer" : "wagn.org",
+        "distros"    : [ "red" ],
+    },
+
+    "architectures" : [
+        "arch_nwsa_1dbm"
+    ],
+
+    "roles" : {
+        "ws" : {
+            "depends" : [
+                "ruby",
+                "rails",
+                "rubygems",
+                "mysql-server",
+                "libmysql-ruby",
+                "libmysqlclient-dev",
+                "libapache2-mod-passenger",
+                "cldstr+cldstr.com+rubygems+ss",
+					 "libfreeimage-dev",
+                "libinline-ruby"
+            ],
+				"files" : [
+					{
+						"uname" : "www-data",
+                  "gname" : "www-data",
+                  "paths" : [
+                     "web/config/environment.rb"
+                  ]
+					},
+               {
+                  "mode" : "0700",
+                  "paths" : [
+                     "preinst",
+                     "postinst",
+                     "prerm",
+                     "postrm"
+                  ]
+               }
+				],
+            "appconfigitems" : [
+                {
+                    "type"         : "file",
+                    "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/databases/e${appconfig.appconfigid}.yml",
+                    "template"     : "tmpl/database.yml.tmpl",
+                    "templatelang" : "varsubst"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : ".htaccess",
+                    "template"     : "tmpl/htaccess.tmpl",
+                    "templatelang" : "varsubst"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/environments/e${appconfig.appconfigid}.rb",
+                    "template"     : "tmpl/production.rb.tmpl",
+                    "templatelang" : "varsubst"
+                },
+            	 {
+                    "type"  : "directory",
+               	  "name"  : "/usr/cldstr/wagn.org/wagn/ws/tmp/.ruby_inline",
+               	  "uname" : "www-data",
+               	  "gname" : "www-data",
+               	  "mode"  : "0755"
+                },
+            	 {
+                    "type"  : "directory",
+               	  "name"  : "/usr/cldstr/wagn.org/wagn/ws/web/log",
+               	  "uname" : "www-data",
+               	  "gname" : "www-data",
+               	  "mode"  : "0755"
+                },
+            	 {
+                    "type"  : "directory",
+               	  "name"  : "/usr/cldstr/wagn.org/wagn/ws/web/tmp",
+               	  "uname" : "www-data",
+               	  "gname" : "www-data",
+               	  "mode"  : "0755"
+                },
+            	 {
+                    "type"  : "directory",
+               	  "name"  : "/usr/cldstr/wagn.org/wagn/ws/web/tmp/cache",
+               	  "uname" : "www-data",
+               	  "gname" : "www-data",
+               	  "mode"  : "0755"
+                }
+            ]
+        },
+        "ctrl" : {
+				"files" : [
+				    { "mode"  : "0700",
+					   "paths" : [ "postinst" ]
+					 } ],
+            "appconfigitems" : [
+                {
+                    "type"       : "mysql-database",
+						  "create"     : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
+                    "retention"  : "backup",
+                    "privileges" : "create, drop, index, select, insert, update, delete"
+                }
+            ]
+        }
+    }
+}
+
+

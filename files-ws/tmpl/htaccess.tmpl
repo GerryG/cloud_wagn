@@ -1,0 +1,16 @@
+# General Apache options
+Options +FollowSymLinks
+Options +ExecCGI
+Options -MultiViews
+
+SetEnv INLINEDIR /usr/cldstr/wagn.org/wagn/ws/web/tmp/
+SetEnv MULTIDBCONFIG databases
+
+# Passenger automatically sets the following
+# SetEnv RAILS_RELATIVE_URL_ROOT ${appconfig.context}
+
+PassengerAppRoot /usr/cldstr/wagn.org/wagn/ws/web
+
+RailsEnv e${appconfig.appconfigid}
+RailsBaseURI ${appconfig.context}
+

@@ -1,0 +1,105 @@
+{
+    "type" : "app",
+
+    "info" : {
+        "name"    : "Wagn",
+        "tagline" : "how pioneers roll",
+        "upstreamversion" : "1.7.1",
+        "cldstrversion"   : "0.%{now.identifier}"
+    },
+
+    "package" : {
+        "maintainer" : "wagn.org",
+        "distros"    : [ "red" ],
+    },
+
+    "architectures" : [
+        "arch_nwsa_1dbm"
+    ],
+
+    "roles" : {
+        "ws" : {
+            "depends" : [
+                "ruby",
+                "rails",
+                "rubygems",
+                "mysql-server",
+                "libmysql-ruby",
+                "libmysqlclient-dev",
+                "libapache2-mod-passenger",
+                "cldstr+cldstr.com+rubygems+ss",
+					 "libfreeimage-dev",
+                "libinline-ruby"
+            ],
+				"files" : [
+					{
+						"uname" : "www-data",
+                  "gname" : "www-data",
+                  "paths" : [
+                     "web/config/environment.rb"
+                  ]
+					}
+				],
+            "appconfigitems" : [
+                {
+                    "type"         : "file",
+                    "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/databases/e${appconfig.appconfigid}.yml",
+                    "template"     : "tmpl/database.yml.tmpl",
+                    "templatelang" : "varsubst"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : ".htaccess",
+                    "template"     : "tmpl/htaccess.tmpl",
+                    "templatelang" : "varsubst"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/environments/e${appconfig.appconfigid}.rb",
+                    "template"     : "tmpl/production.rb.tmpl",
+                    "templatelang" : "varsubst"
+                },
+            {
+               "type" : "symlink",
+               "target" : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
+               "names" : [
+                  "stylesheets",
+                  "javascripts",
+                  "images",
+						"tinymce",
+						"403.html",
+						"404.html",
+						"500.html",
+						"scwblank.html"
+               ]
+            },
+            	 {
+                    "type"  : "directory",
+               	  "uname" : "www-data",
+               	  "gname" : "www-data",
+               	  "mode"  : "0755",
+               	  "names" : [
+               	     "/usr/cldstr/wagn.org/wagn/ws/web/log",
+               	     "/usr/cldstr/wagn.org/wagn/ws/web/tmp/cache",
+						  	  "/usr/cldstr/wagn.org/wagn/ws/web/tmp/.ruby_inline",
+						  	 "card_images",
+							 "card_files"
+						  ]
+
+                }
+            ]
+        },
+        "ctrl" : {
+            "appconfigitems" : [
+                {
+                    "type"       : "mysql-database",
+						  "create"     : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
+                    "retention"  : "backup",
+                    "privileges" : "select, insert, update, delete"
+                }
+            ]
+        }
+    }
+}
+
+
