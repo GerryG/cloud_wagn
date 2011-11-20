@@ -63,14 +63,9 @@
                "type" : "symlink",
                "target" : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
                "names" : [
-                  "stylesheets",
-                  "javascripts",
-                  "images",
-						"tinymce",
-						"403.html",
+						"assets",
 						"404.html",
 						"500.html",
-						"scwblank.html"
                ]
             },
             	 {

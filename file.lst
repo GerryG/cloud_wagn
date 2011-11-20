@@ -1,5 +1,0 @@
-./files-ws/tmpl/database.yml.tmpl
-./files-ws/tmpl/production.rb.tmpl
-./files-ws/tmpl/htaccess.tmpl
-./cldstr-manifest.json
-./files-ctrl/tmpl/bootstrap.sql
