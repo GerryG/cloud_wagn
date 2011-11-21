@@ -1,3 +1,6 @@
 files-ws/web/
 files-ws/gems/
-
+dist/
+build-ctrl/
+build-db/
+build-ws/
