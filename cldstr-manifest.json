@@ -43,7 +43,7 @@
         {
           "uname" : "www-data",
           "gname" : "www-data",
-          "paths" : [ "web/config/environment.rb" ]
+          "paths" : [ "web/config.ru" ]
         }
       ],
       "appconfigitems" : [
