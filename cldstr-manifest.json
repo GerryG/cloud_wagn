@@ -47,8 +47,7 @@
           "paths" : [ 
             "/var/log/cldstr+wagn.org+wagn+ws",
 			 	"web/config.ru",
-            "web/tmp/cache",
-            "web/tmp/.ruby_inline"
+            "web/tmp"
 			 ]
         } 
       ],
@@ -88,7 +87,7 @@
           "type"         : "file",
           "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/tmp/restart.txt"
         }
-       ]
+      ]
     },
     "ctrl" : {
       "appconfigitems" : [
