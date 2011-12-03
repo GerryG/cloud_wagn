@@ -55,46 +55,48 @@
       "appconfigitems" : [
         {
           "type"         : "file",
-          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/databases/${appconfig.appconfigid}.yml",
-          "template"     : "tmpl/database.yml.tmpl",
-          "templatelang" : "varsubst"
-        },
-        {
-          "type"         : "file",
           "name"         : ".htaccess",
           "template"     : "tmpl/htaccess.tmpl",
           "templatelang" : "varsubst"
         },
         {
+          "type"         : "directory",
+          "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}"
+        },
+        {
           "type"         : "file",
-          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/environments/${appconfig.appconfigid}.rb",
-          "template"     : "tmpl/production.rb.tmpl",
+          "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}/database.yml",
+          "template"     : "tmpl/database.yml.tmpl",
           "templatelang" : "varsubst"
         },
         {
-          "type"   : "symlink",
-          "target" : "/usr/cldstr/wagn.org/wagn/ws/web",
-          "name"   : "/usr/cldstr/wagn.org/wagn/ws/rootlinks/${appconfig.appconfigid}"
+          "type"         : "symlink",
+          "target"       : "/usr/cldstr/wagn.org/wagn/ws/web",
+          "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}/web"
         },
         {
-          "type"   : "symlink",
-          "target" : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
-          "names"  : [
+          "type"         : "symlink",
+          "target"       : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
+          "names"        : [
             "assets",
             "404.html",
             "422.html",
             "500.html"
           ]
+        },
+        {
+          "type"         : "file",
+          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/tmp/restart.txt"
         }
-      ]
+       ]
     },
     "ctrl" : {
       "appconfigitems" : [
         {
-          "type"       : "mysql-database",
-          "create"     : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
-          "retention"  : "backup",
-          "privileges" : "select, insert, update, delete"
+          "type"         : "mysql-database",
+          "create"       : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
+          "retention"    : "backup",
+          "privileges"   : "select, insert, update, delete"
         }
       ]
     }
