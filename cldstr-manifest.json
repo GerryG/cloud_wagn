@@ -43,13 +43,19 @@
         {
           "uname" : "www-data",
           "gname" : "www-data",
-          "paths" : [ "web/config.ru" ]
-        }
+          "mode"  : "0755",
+          "paths" : [ 
+            "/var/log/cldstr+wagn.org+wagn+ws",
+			 	"web/config.ru",
+            "web/tmp/cache",
+            "web/tmp/.ruby_inline"
+			 ]
+        } 
       ],
       "appconfigitems" : [
         {
           "type"         : "file",
-          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/databases/e${appconfig.appconfigid}.yml",
+          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/databases/${appconfig.appconfigid}.yml",
           "template"     : "tmpl/database.yml.tmpl",
           "templatelang" : "varsubst"
         },
@@ -61,30 +67,23 @@
         },
         {
           "type"         : "file",
-          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/environments/e${appconfig.appconfigid}.rb",
+          "name"         : "/usr/cldstr/wagn.org/wagn/ws/web/config/environments/${appconfig.appconfigid}.rb",
           "template"     : "tmpl/production.rb.tmpl",
           "templatelang" : "varsubst"
         },
         {
-          "type" : "symlink",
-          "target" : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
-          "names" : [
-            "assets",
-            "404.html",
-            "500.html",
-          ]
+          "type"   : "symlink",
+          "target" : "/usr/cldstr/wagn.org/wagn/ws/web",
+          "name"   : "/usr/cldstr/wagn.org/wagn/ws/rootlinks/${appconfig.appconfigid}"
         },
         {
-          "type"  : "directory",
-          "uname" : "www-data",
-          "gname" : "www-data",
-          "mode"  : "0755",
-          "names" : [
-            "/usr/cldstr/wagn.org/wagn/ws/web/log",
-            "/usr/cldstr/wagn.org/wagn/ws/web/tmp/cache",
-            "/usr/cldstr/wagn.org/wagn/ws/web/tmp/.ruby_inline",
-            "card_images",
-            "card_files"
+          "type"   : "symlink",
+          "target" : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
+          "names"  : [
+            "assets",
+            "404.html",
+            "422.html",
+            "500.html"
           ]
         }
       ]
@@ -101,5 +100,3 @@
     }
   }
 }
-
-

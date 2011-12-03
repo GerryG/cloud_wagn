@@ -1,16 +1,24 @@
 # General Apache options
 Options +FollowSymLinks
-Options +ExecCGI
+#Options +ExecCGI
+# MultiViews not compatible with Passenger
 Options -MultiViews
 
+
 SetEnv INLINEDIR /usr/cldstr/wagn.org/wagn/ws/web/tmp/
-SetEnv MULTIDBCONFIG databases
+#SetEnv MULTIDBCONFIG databases
+SetEnv UUID_STATE_FILE off
 
-# Passenger automatically sets the following
-# SetEnv RAILS_RELATIVE_URL_ROOT ${appconfig.context}
+# This is a symlink to the actual AppRoot at /usr/cldstr/wagn.org/wagn/ws/web
+# Without this, passenger knows all apps share the same root and treats them as one instance,
+# screwing up the env variables that need to be different for each
+# in Passenger 3 this is addressable with PassengerAppGroupName
 
-PassengerAppRoot /usr/cldstr/wagn.org/wagn/ws/web
+PassengerAppRoot /usr/cldstr/wagn.org/wagn/ws/rootlinks/${appconfig.appconfigid}
 
-RackEnv e${appconfig.appconfigid}
+RackEnv ${appconfig.appconfigid}
 RackBaseURI ${appconfig.context}
+
+# RackBaseURI automatically sets the following
+# SetEnv RAILS_RELATIVE_URL_ROOT ${appconfig.context}
 

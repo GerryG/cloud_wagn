@@ -33,7 +33,7 @@ Wagn::Application.configure do
   # See everything in the log (default is :info)
   # config.log_level = :debug
 
-  # Use a different logger for distributed setups
+ # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
@@ -57,6 +57,14 @@ Wagn::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  # Above is standard production.rb 
+  # Below is cldstr-specific
+
+  config.paths['log'] = '/var/log/cldstr+wagn.org+wagn+ws/${appconfig.appconfigid}.log'
+
+  #config.paths['config/database'] = File.join("/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}/database.yml" )
+  config.paths['config/database'] = File.join("/usr/cldstr/wagn.org/wagn/ws/web/config/databases/${appconfig.appconfigid}.yml" )
   
   ENV['RAILS_ASSET_ID']=""
 end
