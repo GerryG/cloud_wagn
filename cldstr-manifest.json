@@ -29,15 +29,14 @@
     "ws" : {
       "depends" : [
         "ruby",
-        "rails",
         "rubygems",
         "mysql-server",
         "libmysql-ruby",
         "libmysqlclient-dev",
         "libapache2-mod-passenger",
         "cldstr+cldstr.com+rubygems+ss",
-        "libfreeimage-dev",
-        "libinline-ruby"
+		  "imagemagick",
+		  "libmagick9-dev"
       ],
       "files" : [
         {
@@ -47,7 +46,8 @@
           "paths" : [ 
             "/var/log/cldstr+wagn.org+wagn+ws",
 			 	"web/config.ru",
-            "web/tmp"
+            "web/tmp",
+            "web/tmp/cache",
 			 ]
         } 
       ],
@@ -63,9 +63,24 @@
           "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}"
         },
         {
+          "type"         : "directory",
+          "uname"        : "www-data",
+          "gname"        : "www-data",
+          "mode"         : "0755",
+          "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}/files",
+          "retention"    : "backup",
+          "retentionbucket" : "uploads"
+        },
+        {
           "type"         : "file",
           "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}/database.yml",
           "template"     : "tmpl/database.yml.tmpl",
+          "templatelang" : "varsubst"
+		  },
+        {
+          "type"         : "file",
+          "name"         : "/var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}/wagn.yml",
+          "template"     : "tmpl/wagn.yml.tmpl",
           "templatelang" : "varsubst"
         },
         {
@@ -78,9 +93,12 @@
           "target"       : "/usr/cldstr/wagn.org/wagn/ws/web/public/$4",
           "names"        : [
             "assets",
+				"files",
             "404.html",
             "422.html",
-            "500.html"
+            "500.html",
+				"robots.txt",
+				"favicon.ico"
           ]
         },
         {
@@ -92,10 +110,12 @@
     "ctrl" : {
       "appconfigitems" : [
         {
-          "type"         : "mysql-database",
-          "create"       : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
-          "retention"    : "backup",
-          "privileges"   : "select, insert, update, delete"
+          "type"            : "mysql-database",
+          "name"            : "maindb",
+          "create"          : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
+          "retention"       : "backup",
+          "retentionbucket" : "db",
+          "privileges"      : "select, insert, update, delete"
         }
       ]
     }
