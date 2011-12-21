@@ -97,8 +97,7 @@
             "404.html",
             "422.html",
             "500.html",
-				"robots.txt",
-				"favicon.ico"
+				"robots.txt"
           ]
         },
         {
