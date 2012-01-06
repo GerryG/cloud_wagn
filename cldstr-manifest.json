@@ -30,13 +30,20 @@
       "depends" : [
         "ruby",
         "rubygems",
+        "cldstr+cldstr.com+rubygems+ss",
         "mysql-server",
         "libmysql-ruby",
         "libmysqlclient-dev",
         "libapache2-mod-passenger",
-        "cldstr+cldstr.com+rubygems+ss",
-		  "imagemagick",
-		  "libmagick9-dev"
+        "libapache2-mod-xsendfile",
+        "imagemagick",
+        "libmagick9-dev",
+        "cldstr+cldstr.com+postfix+ss",
+        "memcached"
+      ],
+      "apache2modules" : [
+        "expires",
+        "xsendfile"
       ],
       "files" : [
         {
@@ -114,7 +121,7 @@
           "create"          : "/usr/cldstr/wagn.org/wagn/ctrl/tmpl/bootstrap.sql",
           "retention"       : "backup",
           "retentionbucket" : "db",
-          "privileges"      : "select, insert, update, delete"
+          "privileges"      : "create, alter, drop, index, select, insert, update, delete"
         }
       ]
     }
